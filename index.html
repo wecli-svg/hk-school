@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#E9E9E9">
 <meta name="description" content="香港八大高校步行30分钟学区小区、在售出租房源、房产投资、升学规划与身份续签官方政策知识库。">
 <title>香港学区房产投资与升学续签咨询</title>
@@ -331,7 +332,7 @@ function estateCard(n){
   const trend = n.saleTrend || {months:[],saleCount:0,changePct:null};
   const trendNote = trend.saleCount >= 3 ? `近3年成交 ${trend.saleCount} 宗｜${monthText(trend.firstMonth)}–${monthText(trend.lastMonth)}` : `近3年成交 ${trend.saleCount || 0} 宗｜样本不足`;
   const facilities = (n.facilities||[]).slice(0,5).map(f=>`<span class="tag">${esc(f)}</span>`).join('');
-  const img = n.image ? `<img src="${esc(n.image)}" alt="${esc(n.name)}外观" loading="lazy" onerror="this.remove()">` : '';
+  const img = n.image ? `<img src="${esc(n.image)}" alt="${esc(n.name)}外观" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
   return `<article class="estate-card" id="estate-${esc(n.id)}">
     <div class="estate-media">${img}<div class="fallback">${esc(n.name)}</div><span class="walk-badge">步行 ${esc(n.walkMinutes)} 分钟</span></div>
     <div class="estate-body">
@@ -415,7 +416,7 @@ function filteredListings(){
   return rows;
 }
 function listingCard(l){
-  const img=l.image?`<img src="${esc(l.image)}" alt="${esc(l.title)}" loading="lazy" onerror="this.remove()">`:'';
+  const img=l.image?`<img src="${esc(l.image)}" alt="${esc(l.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
   return `<article class="listing-card">
     <div class="listing-img">${img}<div class="fallback">${esc(l.estate||'房源')}</div><span class="listing-type">${l.mode==='rent'?'出租':'出售'}</span></div>
     <div class="listing-main">
@@ -436,7 +437,7 @@ function openListing(id){
   const l=PROPERTY_DATA.listings.find(x=>x.id===id); if(!l)return;
   $('#modalTitle').textContent=l.title;
   $('#modalKicker').textContent=`${l.mode==='rent'?'出租房源':'出售房源'}｜中原官方快照`;
-  $('#modalImage').innerHTML=(l.image?`<img src="${esc(l.image)}" alt="${esc(l.title)}" onerror="this.remove()">`:'')+`<div class="fallback">${esc(l.estate)}</div>`;
+  $('#modalImage').innerHTML=(l.image?`<img src="${esc(l.image)}" alt="${esc(l.title)}" referrerpolicy="no-referrer" onerror="this.remove()">`:'')+`<div class="fallback">${esc(l.estate)}</div>`;
   $('#modalPrice').textContent=fmtMoney(l.price);
   $('#modalMeta').textContent=`${l.estate}｜${l.district}｜${l.university}步行约 ${l.walkMinutes ?? '—'} 分钟`;
   $('#modalGrid').innerHTML=`
